@@ -21,7 +21,7 @@ body {
 
 /* Header Styles */
 .main-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ec4908 0%, #fff200 100%);
     color: white;
     padding: 1rem 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@ body {
 .main-header .container {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* separates title and nav */
+    justify-content: space-between;
 }
 
 .main-header h1 {
@@ -64,7 +64,7 @@ nav {
 }
 
 .main-header nav a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(236, 73, 8, 0.8);
 }
 
 .user-info {
@@ -116,41 +116,41 @@ main {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #ec4908;
+    box-shadow: 0 0 0 3px rgba(236, 73, 8, 0.1);
 }
 
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: #667eea;
+    background: linear-gradient(135deg, #ec4908 0%, #fff200 100%);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
     text-decoration: none;
-    transition: background 0.3s;
+    transition: background 0.5s;
 }
 
 .btn:hover {
-    background: #5568d3;
+    background: linear-gradient(135deg, #d63f07 0%, #ffeb00 100%);
 }
 
 .btn-secondary {
-    background: #6c757d;
+    background: linear-gradient(135deg, #ec4908 0%, #ff6b35 100%);
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: linear-gradient(135deg, #d63f07 0%, #ff5520 100%);
 }
 
 .btn-danger {
-    background: #dc3545;
+    background: linear-gradient(135deg, #dc3545 0%, #ec4908 100%);
 }
 
 .btn-danger:hover {
-    background: #c82333;
+    background: linear-gradient(135deg, #c82333 0%, #d63f07 100%);
 }
 
 .btn-small {
@@ -173,14 +173,14 @@ main {
 
 .message.success {
     background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    color: #574315;
+    border: 1px solid #ffb300;
 }
 
 .message.info {
-    background: #d1ecf1;
+    background: #f1e7d1;
     color: #0c5460;
-    border: 1px solid #bee5eb;
+    border: 1px solid #ffb300;
 }
 
 /* Search Form */
@@ -220,19 +220,16 @@ main {
     border-bottom: 1px solid #ddd;
 }
 
+.books-table thead {
+    background: linear-gradient(135deg, #ec4908 0%, #fff200 100%);
+}
+
 .books-table th {
-    background: #667eea;
+    background: transparent;
     color: white;
     font-weight: bold;
 }
 
-.books-table tr:hover {
-    background: #f8f9fa;
-}
-
-.books-table tr:last-child td {
-    border-bottom: none;
-}
 
 /* Pagination */
 .pagination {
@@ -254,15 +251,15 @@ main {
 }
 
 .pagination a:hover {
-    background: #667eea;
+    background: linear-gradient(135deg, #ec4908 0%, #fff200 100%);
     color: white;
-    border-color: #667eea;
+    border-color: #ec4908;
 }
 
 .pagination .active {
-    background: #667eea;
+    background: linear-gradient(135deg, #ec4908 0%, #fff200 100%);
     color: white;
-    border-color: #667eea;
+    border-color: #ec4908;
 }
 
 /* Status Badge */
