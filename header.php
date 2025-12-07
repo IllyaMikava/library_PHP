@@ -16,13 +16,13 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
     <header class="main-header">
         <div class="container">
-            <h1>📚 Library Book Reservation System</h1>
+            <h1>Library Book Reservation System</h1>
             <nav>
                 <?php if (isLoggedIn()) : ?>
                     <a href="search.php">Search Books</a>
                     <a href="myreservations.php">My Reservations</a>
                     <div class="nav-right">
-                        <span class="user-info">Welcome, oooo</span>
+                        <span class="user-info">Welcome!</span>
                         <a class="logout-btn" href="logout.php">Logout</a>
                     </div>
                 <?php else : ?>

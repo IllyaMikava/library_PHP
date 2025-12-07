@@ -14,7 +14,7 @@ $search_title = isset($_GET['title']) ? sanitizeInput($_GET['title']) : '';
 $search_author = isset($_GET['author']) ? sanitizeInput($_GET['author']) : '';
 $search_category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 
-// Get all categories for dropdown
+// Get categories for dropdown
 $conn = getDBConnection();
 $categories = [];
 $cat_result = $conn->query("SELECT categoryID, categoryDescription FROM category ORDER BY categoryDescription");
@@ -22,40 +22,39 @@ while ($row = $cat_result->fetch_assoc()) {
     $categories[] = $row;
 }
 
-// Build search query
+// Check if search was performed
 $search_performed = !empty($search_title) || !empty($search_author) || !empty($search_category);
 
 if ($search_performed) {
-    $where_conditions = [];
+    // Build WHERE clause dynamically
+    $where_parts = [];
     $params = [];
     $types = "";
     
     if (!empty($search_title)) {
-        $where_conditions[] = "b.booktitle LIKE ?";
-        $params[] = "%" . $search_title . "%";
+        $where_parts[] = "b.booktitle LIKE ?";
+        $params[] = "%{$search_title}%";
         $types .= "s";
     }
     
     if (!empty($search_author)) {
-        $where_conditions[] = "b.author LIKE ?";
-        $params[] = "%" . $search_author . "%";
+        $where_parts[] = "b.author LIKE ?";
+        $params[] = "%{$search_author}%";
         $types .= "s";
     }
     
     if (!empty($search_category)) {
-        $where_conditions[] = "b.categoryID = ?";
+        $where_parts[] = "b.categoryID = ?";
         $params[] = $search_category;
         $types .= "i";
     }
     
-    $where_clause = implode(" AND ", $where_conditions);
+    $where_clause = implode(" AND ", $where_parts);
     
     // Count total results
-    $count_sql = "SELECT COUNT(*) as total FROM books b WHERE " . $where_clause;
+    $count_sql = "SELECT COUNT(*) as total FROM books b WHERE {$where_clause}";
     $count_stmt = $conn->prepare($count_sql);
-    if (!empty($params)) {
-        $count_stmt->bind_param($types, ...$params);
-    }
+    $count_stmt->bind_param($types, ...$params);
     $count_stmt->execute();
     $total_books = $count_stmt->get_result()->fetch_assoc()['total'];
     $count_stmt->close();
@@ -65,7 +64,7 @@ if ($search_performed) {
             (SELECT COUNT(*) FROM reservedbooks rb WHERE rb.ISBN = b.ISBN) as is_reserved
             FROM books b
             LEFT JOIN category c ON b.categoryID = c.categoryID
-            WHERE " . $where_clause . "
+            WHERE {$where_clause}
             ORDER BY b.booktitle
             LIMIT ? OFFSET ?";
     
@@ -84,8 +83,6 @@ if ($search_performed) {
 }
 
 $conn->close();
-
-// Calculate total pages
 $total_pages = $total_books > 0 ? ceil($total_books / $books_per_page) : 0;
 
 include 'header.php';
